@@ -19,11 +19,20 @@ class DoctorPage extends Page {
     get listValuesForDateSelected() {
         return $(`//*[@data-test-id='date_select_items']/*[@class='select-box__options']`)
     }
-    // пункт Все дни отмечен галочкой 
+    // пункт 'Все дни' отмечен галочкой в списке значений для выбора даты
     get itemAllDaysChecked() {
         return $(`//*[text()='Все дни']/../span[contains(@class, 'active-icon')]`)
     }
+    // пункт 'Завтра' в списке значений для выбора даты
+    get itemTomorrow() {
+        return $(`//span[contains(@class, 'options-item-title') and contains(text(), 'Завтра')]`)
+    }
+    // пункт 'Завтра' в списке значений для выбора даты (для получения даты и мес.)
+    get itemTomorrowGetDateAndMonth() {
+        return $(`//span[contains(@class, 'options-item-title') and contains(text(), 'Завтра')]/span`)
+    }
     
+
     /**
      * проверка, что появился открылась страница
      */
@@ -49,10 +58,11 @@ class DoctorPage extends Page {
     }
 
     /**
-     * проверка, что кнопка содержит текст 'Расписание на все дни'
+     * проверка, что кнопка содержит текст
+     * @param {String} nameBtn - ожид. текст на кнопке 
      */
-    checkTextInScheduleForAllDaysBtn() {
-        expect(this.btnScheduleForAllDays).toHaveText(`Расписание на все дни`);
+    checkTextInScheduleForAllDaysBtn(nameBtn) {
+        expect(this.btnScheduleForAllDays).toHaveText(nameBtn);
     }
 
     /**
@@ -71,10 +81,25 @@ class DoctorPage extends Page {
     }
 
     /**
-     * проверка, что пункт Все дни отмечен галочкой
+     * проверка, что пункт 'Все дни' отмечен галочкой
      */
     checkItemAllDaysIsSelected() {
         expect(this.itemAllDaysChecked).toBeDisplayed();
+    }
+
+    /**
+     * получаем значение даты и месяца рядом с пунктом 'Завтра'
+     * в списке значений для выбора даты
+     */
+    getDateAndMonth() {
+        return this.itemTomorrowGetDateAndMonth.getText();
+    }
+
+    /**
+     * для выбора пункта 'Завтра' в списке значений для выбора даты
+     */
+    clickItemTomorrow() {
+        this.itemTomorrow.click();
     }
 
     /**
