@@ -38,7 +38,7 @@ describe(`Врачи › Страница выдачи врачей: Фильт�
             MainPage.checkAmountDoctors();
         });
         it(`Отображаются врачи, работающие в выбранный день`, () => {
-            
+            MainPage.checkTextOnlineScheduleСardDoctors(dateAndMonthValue);
         });
     });
 });

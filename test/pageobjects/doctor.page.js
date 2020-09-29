@@ -5,37 +5,45 @@ const Page = require('./common.page');
  * Класс для работы со страницей "/doctor" 
  */
 class DoctorPage extends Page {
+
     // текст 'Запишитесь на приём к врачу онлайн'
     get titlePage() { return $(`//div[contains(@class,'doctors-list-page-search-form__title')]`) }
+
     // список карточек докторов на стр.
     get cardDoctors() {
         return $$(`//div[@data-test-id='doctor-card-search-results']`)
     }
+
     // кнопка 'Расписание на все дни'
     get btnScheduleForAllDays() {
         return $(`//*[text()='Дата приема']/..//span[@class='select-box__title']`)
     }
+
     // список значений для выбора даты
     get listValuesForDateSelected() {
         return $(`//*[@data-test-id='date_select_items']/*[@class='select-box__options']`)
     }
+
     // пункт 'Все дни' отмечен галочкой в списке значений для выбора даты
     get itemAllDaysChecked() {
         return $(`//*[text()='Все дни']/../span[contains(@class, 'active-icon')]`)
     }
+
     // пункт 'Завтра' в списке значений для выбора даты
     get itemTomorrow() {
         return $(`//span[contains(@class, 'options-item-title') and contains(text(), 'Завтра')]`)
     }
+
     // пункт 'Завтра' в списке значений для выбора даты (для получения даты и мес.)
     get itemTomorrowGetDateAndMonth() {
         return $(`//span[contains(@class, 'options-item-title') and contains(text(), 'Завтра')]/span`)
     }
+
     // для получения значений Онлайн-расписание на ... в список карточек докторов 
     get valueOnlineScheduleСardDoctors() {
         return $$(`//*[@class='clinic-slots__caption']`)
     }
-    
+
     /**
      * проверка, что появился открылась страница
      */
@@ -57,6 +65,7 @@ class DoctorPage extends Page {
      * проверка, что появился кнопка 'Расписание на все дни'
      */
     checkIsDisplaedScheduleForAllDaysBtn() {
+
         expect(this.btnScheduleForAllDays).toBeDisplayed();
     }
 
@@ -105,6 +114,19 @@ class DoctorPage extends Page {
         this.itemTomorrow.click();
     }
 
+    /**
+     * проверка текста `Онлайн-расписание на ... 
+     * @param {String} currentDate 
+     */
+    checkTextOnlineScheduleСardDoctors(currentDate) {
+        let amountCards = this.valueOnlineScheduleСardDoctors;
+        amountCards.forEach((element) => {
+            element.scrollIntoView();
+            element.waitForExist({ timeout: 5000 });
+            expect(element).toHaveTextContaining(`Онлайн-расписание на ${currentDate}`);
+        });
+    }
+    
     /**
      * для открытия страницы с параметром
      * @param {string} page - имя страницы 
