@@ -1,0 +1,35 @@
+{
+  "name": "docror",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wdio.conf.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eglu2016/docror.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eglu2016/docror/issues"
+  },
+  "homepage": "https://github.com/eglu2016/docror#readme",
+  "devDependencies": {
+    "@wdio/cli": "^6.5.2",
+    "@wdio/local-runner": "^6.5.2",
+    "@wdio/mocha-framework": "^6.5.0",
+    "@wdio/spec-reporter": "^6.4.7",
+    "@wdio/sync": "^6.5.0",
+    "chromedriver": "^85.0.1",
+    "wdio-chromedriver-service": "^6.0.4"
+  },
+  "dependencies": {
+    "expect-webdriverio": "^1.4.0"
+  }
+}
