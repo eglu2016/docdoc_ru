@@ -31,8 +31,11 @@ class DoctorPage extends Page {
     get itemTomorrowGetDateAndMonth() {
         return $(`//span[contains(@class, 'options-item-title') and contains(text(), 'Завтра')]/span`)
     }
+    // для получения значений Онлайн-расписание на ... в список карточек докторов 
+    get valueOnlineScheduleСardDoctors() {
+        return $$(`//*[@class='clinic-slots__caption']`)
+    }
     
-
     /**
      * проверка, что появился открылась страница
      */
